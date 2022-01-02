@@ -6,11 +6,18 @@ public class SinglyLinkedListDriver {
     public static void main(String[] args) {
         SinglyLinkedList<String> list = new SinglyLinkedList<>();
 
-        list.addNodeToList("Bob");
-        list.addNodeToList("sara");
-        list.addNodeToList("Fletcher");
+        list.insertNode("Z");
+        list.insertNode("C");
+        list.insertNode("B");
+        list.insertNode("B");
 
-        System.out.println(list.tail.data);
+        Node temp = list.head;
+        while(temp != null){
+            System.out.println(temp.data);
+            temp = temp.nextNode;
+        }
+
+
 
     }
 }

@@ -1,9 +1,8 @@
 package com.algorithms;
 
 
-import java.util.Comparator;
 
-public class SinglyLinkedList<T> implements Comparator<T> {
+public class SinglyLinkedList<T extends Comparable<T>> {
 
     Node<T> head;
     Node<T> tail;
@@ -12,28 +11,28 @@ public class SinglyLinkedList<T> implements Comparator<T> {
         this.head = null;
     }
 
-    public void addNodeToList(T data) {
+    public void insertNode(T data) {
 
-        Node<T> tempNode = new Node<>(data);
+        Node<T> newNode = new Node<>(data);
+        Node<T> currentNode;
 
-        if(head == null || head.data.(temp) {
-            head = tempNode;
-            tail = tempNode;
-
+        if(head == null || newNode.data.compareTo(head.data) <= 0) {
+            head = newNode;
         }
         else {
-            Node<T> currentNode = head;
+            currentNode = head;
 
-            while (currentNode.nextNode != null){
-                currentNode = currentNode.nextNode;
+            while (currentNode.nextNode != null && currentNode.nextNode.data.compareTo(newNode.data) > 0){
+                if(currentNode.data.compareTo(newNode.data) > 0){
+                    currentNode = currentNode.nextNode;
+                    newNode.nextNode = currentNode.nextNode;
+                    currentNode.nextNode = newNode;
+                }
             }
-            currentNode.nextNode = tempNode;
-            tail = tempNode;
-        }
-    }
 
-    @Override
-    public int compare(T o1, T o2) {
-        return 0;
+
+
+
+        }
     }
 }
