@@ -6,9 +6,9 @@ public class SinglyLinkedListDriver {
     public static void main(String[] args) {
 
 
-
-        SinglyLinkedList<String> list = new SinglyLinkedList();
-
+        Node<String> head = new Node<>("James");
+        SinglyLinkedList<String> list = new SinglyLinkedList<>(head);
+        list.setHead(head);
         list.insertNode("trevor");
 
         list.insertNode("dave");
