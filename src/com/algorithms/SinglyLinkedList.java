@@ -15,7 +15,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
     //Copy Constructor
     public SinglyLinkedList<T> CopyList (SinglyLinkedList<T> oldList) {
-
+        // TODO: 1/4/2022 still not returning the correct head with the next pointer going to the next node
         if(oldList.head == null)
             return null;
         else{
@@ -58,13 +58,13 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     }
 
     // Get the Front Node
-    public Node<T> getHead(){
+    public Node<T> getFront(){
 
         return this.head;
     }
 
     // Get the Back Node
-    public Node<T> getTail(){
+    public Node<T> getBack(){
 
         Node<T> currentNode = head;
         if(currentNode == null){
@@ -78,8 +78,27 @@ public class SinglyLinkedList<T extends Comparable<T>> {
             }
             return rearNode;
         }
-
     }
 
+    // Remove node from the front of the list
+    public void popFront(){
+        this.head = head.nextNode;
+    }
 
+    // Remove Node from the back of the list
+    public void popBack() {
+        // TODO: 1/4/2022 PopBack still not working
+        Node<T> currentNode = head;
+        if(currentNode != null){
+
+            Node<T> tempNode = currentNode;
+            while(currentNode != null){
+                tempNode = currentNode;
+                currentNode = currentNode.nextNode;
+            }
+
+            tempNode.nextNode = null;
+
+        }
+    }
 }
