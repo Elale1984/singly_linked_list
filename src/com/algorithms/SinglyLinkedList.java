@@ -2,37 +2,43 @@ package com.algorithms;
 
 public class SinglyLinkedList<T extends Comparable<T>> {
 
+    public Node<T> head;
+    public Node<T> tail;
 
-    public Node<T> getTail() {
-        return tail;
-    }
-
-    public Node<T> getHead() {
-        return head;
-    }
-
-    public void setHead(Node<T> head) {
-        this.head = head;
-    }
-
-    Node<T> head;
-    Node<T> tail = null;
-
+    //Default Constructor
     public SinglyLinkedList() {
         this.head = null;
     }
+
+    //Parameterized Constructor
     public SinglyLinkedList(Node<T> head) { this.head = head;}
 
-//    insert method
+    //Copy Constructor
+    public SinglyLinkedList<T> CopyList (SinglyLinkedList<T> oldList) {
+
+        if(oldList.head == null)
+            return null;
+        else{
+
+            Node<T> currentNode = oldList.head;
+            Node<T> copyNode = currentNode;
+            while(currentNode != null){
+                copyNode.nextNode = currentNode.nextNode;
+                currentNode = currentNode.nextNode;
+            }
+            return new SinglyLinkedList<>(copyNode);
+        }
+
+
+    }
+    //Insert method
     public void insertNode(T data) {
 
         Node<T> newNode = new Node<>(data);
         if(head == null || newNode.data.compareTo(head.data) <= 0) {
 
             newNode.nextNode = head;
-            head = newNode;
-            if (head.nextNode == null)
-                tail = head;
+            this.head = newNode;
 
         }
         else {
@@ -51,15 +57,5 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         }
     }
 
-    public void setTail(Node<T> head){
-        System.out.println(head.data);
 
-        Node<T> currentNode = head;
-
-        while(currentNode != null){
-            tail = currentNode;
-            currentNode = currentNode.nextNode;
-        }
-
-    }
 }
