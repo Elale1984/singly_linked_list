@@ -30,14 +30,9 @@ public class SinglyLinkedListDriver {
             tempHead = tempHead.nextNode;
         }
 
-        SinglyLinkedList<String> newList = new SinglyLinkedList<>();
-        newList.CopyList(list);
 
-        tempHead = newList.head;
-        while(tempHead != null){
-            System.out.println(tempHead.data);
-            tempHead = tempHead.nextNode;
-        }
+        System.out.println(list.getHead().data);
+        System.out.println(list.getTail().data);
 
     }
 }
