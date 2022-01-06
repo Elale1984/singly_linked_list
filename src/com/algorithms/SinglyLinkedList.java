@@ -21,10 +21,11 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         else{
 
             Node<T> currentNode = oldList.head;
-            Node<T> copyNode = currentNode;
+            Node<T> copyNode = new Node<>(oldList.head.data);
             while(currentNode != null){
-                copyNode = currentNode;
                 currentNode = currentNode.nextNode;
+                copyNode.nextNode = new Node<>(currentNode.data);
+                copyNode = copyNode.nextNode;
             }
             return new SinglyLinkedList<>(copyNode);
         }
@@ -67,6 +68,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     public Node<T> getBack(){
 
         Node<T> currentNode = head;
+
         if(currentNode == null){
             return null;
         }
@@ -135,4 +137,11 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         }
         return previousNode;
     }
+
+
+
+    public void traverse() {
+
+    }
+
 }

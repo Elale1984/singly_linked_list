@@ -20,7 +20,18 @@ public class SinglyLinkedListDriver {
         list.insertNode("andre");
         list.insertNode("cameron");
 
+
         printList(list);
+
+        // Test the copy constructor
+        System.out.println("Using the Copy constructor: ");
+        System.out.println("Original List:");
+        printList(list);
+
+        SinglyLinkedList<String> copyList = new SinglyLinkedList<>();
+        copyList = copyList.CopyList(list);
+
+        printList(copyList);
 
         list.popFront();
         printList(list);
