@@ -101,4 +101,38 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
         }
     }
+
+    // Get the size of the linked list
+    public int size(){
+        int size = 0;
+        Node<T> currentNode = head;
+        if(currentNode == null){
+            return size;
+        }
+        else {
+            while (currentNode != null){
+                size++;
+                currentNode = currentNode.nextNode;
+            }
+        }
+        return size;
+    }
+
+    // Method returns true if singlyLinkedList is empty and false if it is not empty
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    // Reverse the singlyLinkedList
+    public Node<T> reverse() {
+        Node<T> previousNode = null;
+
+        while (head != null){
+            Node<T> nextNode = head.nextNode;
+            head.nextNode = previousNode;
+            previousNode = head;
+            head = nextNode;
+        }
+        return previousNode;
+    }
 }
