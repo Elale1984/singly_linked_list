@@ -2,16 +2,34 @@ package com.algorithms;
 
 public class SinglyLinkedList<T extends Comparable<T>> {
 
-    public Node<T> head;
-    public Node<T> tail;
+    // Getters and setters
+    public Node<T> getHead() {
+        return head;
+    }
+
+    public void setHead(Node<T> head) {
+        this.head = head;
+    }
+
+    public Node<T> getTail() {
+        return tail;
+    }
+
+    public void setTail(Node<T> tail) {
+        this.tail = tail;
+    }
+
+    private Node<T> head;
+    private Node<T> tail;
 
     //Default Constructor
     public SinglyLinkedList() {
         this.head = null;
+        this.tail = null;
     }
 
     //Parameterized Constructor
-    public SinglyLinkedList(Node<T> head) { this.head = head;}
+    public SinglyLinkedList(Node<T> head) { this.head = head; assignTail();}
 
     // Copy Constructor with deep copy
     public SinglyLinkedList(SinglyLinkedList<T> list) {
@@ -28,12 +46,15 @@ public class SinglyLinkedList<T extends Comparable<T>> {
            else {
                copyNode.nextNode = new Node<>(referenceNode.data);
                copyNode = copyNode.nextNode;
+
            }
+            this.setTail(referenceNode);
             referenceNode = referenceNode.nextNode;
 
         }
+        assignTail();
 
-        this.tail = copyNode;
+
     }
     //Insert method
     public void insertNode(T data) {
@@ -60,6 +81,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
             tempNode.nextNode = newNode;
 
         }
+        assignTail();
 
     }
 
@@ -94,17 +116,12 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
     // Remove Node from the back of the list
     public void popBack() {
-        // TODO: 1/4/2022 PopBack still not working
-        Node<T> currentNode = head;
-        if(currentNode != null){
-
-            Node<T> tempNode = currentNode;
-            while(currentNode != null){
-                tempNode = currentNode;
-                currentNode = currentNode.nextNode;
-            }
-
-            tempNode.nextNode = null;
+        Node<T> tempNode = this.head;
+        while(tempNode != null){
+            if(tempNode.nextNode == getTail())
+                tempNode.nextNode = null;
+            else
+                tempNode = tempNode.nextNode;
 
         }
     }
@@ -133,14 +150,30 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     // Reverse the singlyLinkedList
     public Node<T> reverse() {
         Node<T> previousNode = null;
-
-        while (head != null){
-            Node<T> nextNode = head.nextNode;
-            head.nextNode = previousNode;
-            previousNode = head;
-            head = nextNode;
+        Node<T> tempHead = this.head;
+        setTail(this.head);
+        while (tempHead != null){
+            Node<T> nextNode = tempHead.nextNode;
+            tempHead.nextNode = previousNode;
+            previousNode = tempHead;
+            tempHead = nextNode;
         }
+        setHead(previousNode);
         return previousNode;
+    }
+
+    private void assignTail(){
+
+        if(this.head == null){
+            this.setTail(null);
+        }
+        else {
+            Node<T> temp = this.head;
+            while(temp != null){
+                this.setTail(temp);
+                temp = temp.nextNode;
+            }
+        }
     }
 
 
