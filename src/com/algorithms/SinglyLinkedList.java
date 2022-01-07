@@ -24,18 +24,16 @@ public class SinglyLinkedList<T extends Comparable<T>> {
            if(this.head == null){
                copyNode = new Node<>(referenceNode.data);
                this.head = copyNode;
-               referenceNode = referenceNode.nextNode;
            }
            else {
-               Node<T> tempNode = new Node<>(referenceNode.data);
-               copyNode.nextNode = tempNode;
+               copyNode.nextNode = new Node<>(referenceNode.data);
                copyNode = copyNode.nextNode;
-               referenceNode = referenceNode.nextNode;
            }
+            referenceNode = referenceNode.nextNode;
 
         }
 
-
+        this.tail = copyNode;
     }
     //Insert method
     public void insertNode(T data) {
@@ -45,6 +43,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
             newNode.nextNode = head;
             this.head = newNode;
+            this.tail = newNode;
 
         }
         else {
@@ -61,6 +60,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
             tempNode.nextNode = newNode;
 
         }
+
     }
 
     // Get the Front Node
@@ -143,10 +143,5 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         return previousNode;
     }
 
-
-
-    public void traverse() {
-
-    }
 
 }
