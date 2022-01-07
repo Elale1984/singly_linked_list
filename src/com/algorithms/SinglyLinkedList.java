@@ -34,12 +34,6 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         assignTail();
     }
 
-    //Parameterized Constructor with both head and tail
-    public SinglyLinkedList(Node<T> head, Node<T> tail) {
-        this.head = head;
-        this.tail = tail;
-    }
-
     // Copy Constructor with deep copy
     public SinglyLinkedList(SinglyLinkedList<T> list) {
 
@@ -179,7 +173,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         if (tempHead2 == null) {
             return;
         }
-        Node<T> result = new Node<T>(null);
+        Node<T> result = new Node<>(null);
         Node<T> prev = result;
         while (tempHead1 != null && tempHead2 != null) {
             if (tempHead1.data.compareTo(tempHead2.data) <= 0) {
