@@ -6,7 +6,7 @@ public class SinglyLinkedListDriver {
     public static void main(String[] args) {
 
         //Test the constructor for a node
-        Node<String> listHead = new Node<>("Paul");
+        Node<String> listHead = new Node<>("paul");
 
         //Test the constructor for the SinglyLinkedList
         SinglyLinkedList<String> list = new SinglyLinkedList<>(listHead);
@@ -56,6 +56,22 @@ public class SinglyLinkedListDriver {
         System.out.println("\nOriginal list empty? " + list.isEmpty());
         System.out.println("\nNew list empty? " + aList.isEmpty());
 
+
+
+        System.out.println("Testing the mergeList method...");
+        System.out.println("\nCreated a new SinglyLinkedList containing: ");
+        Node<String> list2Head = new Node<>("uncle bob");
+        SinglyLinkedList<String> list2 = new SinglyLinkedList<>(list2Head);
+
+        list2.insertNode("nikki");
+        list2.insertNode("izabella");
+        list2.insertNode("natalee");
+
+        printList(list2);
+        System.out.println("Merging the two lists make the new list as follows: ");
+        list.mergeLists(list2);
+        printList(list);
+
         // Test reverse the SinglyLinkedList
         System.out.println("\nThe current list is as follows: ");
         printList(list);
@@ -64,7 +80,6 @@ public class SinglyLinkedListDriver {
         printList(reversedList);
         System.out.println("The new head is " + list.getHead().data +
                 " and the new tail is " + list.getTail().data);
-
 
     }
 

@@ -28,8 +28,17 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         this.tail = null;
     }
 
-    //Parameterized Constructor
-    public SinglyLinkedList(Node<T> head) { this.head = head; assignTail();}
+    //Parameterized Constructor with just head
+    public SinglyLinkedList(Node<T> head) {
+        this.head = head;
+        assignTail();
+    }
+
+    //Parameterized Constructor with both head and tail
+    public SinglyLinkedList(Node<T> head, Node<T> tail) {
+        this.head = head;
+        this.tail = tail;
+    }
 
     // Copy Constructor with deep copy
     public SinglyLinkedList(SinglyLinkedList<T> list) {
@@ -37,17 +46,16 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         Node<T> referenceNode = list.head;
         Node<T> copyNode = null;
 
-        while(referenceNode != null){
+        while (referenceNode != null) {
 
-           if(this.head == null){
-               copyNode = new Node<>(referenceNode.data);
-               this.head = copyNode;
-           }
-           else {
-               copyNode.nextNode = new Node<>(referenceNode.data);
-               copyNode = copyNode.nextNode;
+            if (this.head == null) {
+                copyNode = new Node<>(referenceNode.data);
+                this.head = copyNode;
+            } else {
+                copyNode.nextNode = new Node<>(referenceNode.data);
+                copyNode = copyNode.nextNode;
 
-           }
+            }
             this.setTail(referenceNode);
             referenceNode = referenceNode.nextNode;
 
@@ -56,18 +64,18 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
 
     }
+
     //Insert method
     public void insertNode(T data) {
 
         Node<T> newNode = new Node<>(data);
-        if(head == null || newNode.data.compareTo(head.data) <= 0) {
+        if (head == null || newNode.data.compareTo(head.data) <= 0) {
 
             newNode.nextNode = head;
             this.head = newNode;
             this.tail = newNode;
 
-        }
-        else {
+        } else {
             Node<T> currentNode = head;
             Node<T> tempNode = currentNode;
 
@@ -86,22 +94,21 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     }
 
     // Get the Front Node
-    public Node<T> getFront(){
+    public Node<T> getFront() {
 
         return this.head;
     }
 
     // Get the Back Node
-    public Node<T> getBack(){
+    public Node<T> getBack() {
 
         Node<T> currentNode = head;
 
-        if(currentNode == null){
+        if (currentNode == null) {
             return null;
-        }
-        else {
+        } else {
             Node<T> rearNode = currentNode;
-            while(currentNode != null){
+            while (currentNode != null) {
                 rearNode = currentNode;
                 currentNode = currentNode.nextNode;
             }
@@ -110,15 +117,15 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     }
 
     // Remove node from the front of the list
-    public void popFront(){
+    public void popFront() {
         this.head = head.nextNode;
     }
 
     // Remove Node from the back of the list
     public void popBack() {
         Node<T> tempNode = this.head;
-        while(tempNode != null){
-            if(tempNode.nextNode == getTail())
+        while (tempNode != null) {
+            if (tempNode.nextNode == getTail())
                 tempNode.nextNode = null;
             else
                 tempNode = tempNode.nextNode;
@@ -127,14 +134,13 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     }
 
     // Get the size of the linked list
-    public int size(){
+    public int size() {
         int size = 0;
         Node<T> currentNode = head;
-        if(currentNode == null){
+        if (currentNode == null) {
             return size;
-        }
-        else {
-            while (currentNode != null){
+        } else {
+            while (currentNode != null) {
                 size++;
                 currentNode = currentNode.nextNode;
             }
@@ -152,7 +158,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         Node<T> previousNode = null;
         Node<T> tempHead = this.head;
         setTail(this.head);
-        while (tempHead != null){
+        while (tempHead != null) {
             Node<T> nextNode = tempHead.nextNode;
             tempHead.nextNode = previousNode;
             previousNode = tempHead;
@@ -162,14 +168,47 @@ public class SinglyLinkedList<T extends Comparable<T>> {
         return previousNode;
     }
 
-    private void assignTail(){
+    // This method will merge two lists in order
+    public void mergeLists(SinglyLinkedList<T> secondList) {
+        Node<T> tempHead1 = this.head;
+        Node<T> tempHead2 = secondList.head;
 
-        if(this.head == null){
-            this.setTail(null);
+        if (tempHead1 == null) {
+            return;
         }
-        else {
+        if (tempHead2 == null) {
+            return;
+        }
+        Node<T> result = new Node<T>(null);
+        Node<T> prev = result;
+        while (tempHead1 != null && tempHead2 != null) {
+            if (tempHead1.data.compareTo(tempHead2.data) <= 0) {
+                prev.nextNode = tempHead1;
+                tempHead1 = tempHead1.nextNode;
+            } else {
+                prev.nextNode = tempHead2;
+                tempHead2 = tempHead2.nextNode;
+            }
+            prev = prev.nextNode;
+        }
+        if (tempHead1 != null) {
+            prev.nextNode = tempHead1;
+        }
+        if (tempHead2 != null) {
+            prev.nextNode = tempHead2;
+        }
+        this.head = result.nextNode;
+    }
+
+
+    // This utility method will reassign the tail when called
+    private void assignTail() {
+
+        if (this.head == null) {
+            this.setTail(null);
+        } else {
             Node<T> temp = this.head;
-            while(temp != null){
+            while (temp != null) {
                 this.setTail(temp);
                 temp = temp.nextNode;
             }
