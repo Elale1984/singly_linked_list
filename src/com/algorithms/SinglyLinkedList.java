@@ -13,21 +13,26 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     //Parameterized Constructor
     public SinglyLinkedList(Node<T> head) { this.head = head;}
 
-    //Copy Constructor
-    public SinglyLinkedList<T> CopyList (SinglyLinkedList<T> oldList) {
-        // TODO: 1/4/2022 still not returning the correct head with the next pointer going to the next node
-        if(oldList.head == null)
-            return null;
-        else{
+    // Copy Constructor with deep copy
+    public SinglyLinkedList(SinglyLinkedList<T> list) {
 
-            Node<T> currentNode = oldList.head;
-            Node<T> copyNode = new Node<>(oldList.head.data);
-            while(currentNode != null){
-                currentNode = currentNode.nextNode;
-                copyNode.nextNode = new Node<>(currentNode.data);
-                copyNode = copyNode.nextNode;
-            }
-            return new SinglyLinkedList<>(copyNode);
+        Node<T> referenceNode = list.head;
+        Node<T> copyNode = null;
+
+        while(referenceNode != null){
+
+           if(this.head == null){
+               copyNode = new Node<>(referenceNode.data);
+               this.head = copyNode;
+               referenceNode = referenceNode.nextNode;
+           }
+           else {
+               Node<T> tempNode = new Node<>(referenceNode.data);
+               copyNode.nextNode = tempNode;
+               copyNode = copyNode.nextNode;
+               referenceNode = referenceNode.nextNode;
+           }
+
         }
 
 

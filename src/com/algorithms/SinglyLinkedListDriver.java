@@ -28,8 +28,7 @@ public class SinglyLinkedListDriver {
         System.out.println("Original List:");
         printList(list);
 
-        SinglyLinkedList<String> copyList = new SinglyLinkedList<>();
-        copyList = copyList.CopyList(list);
+        SinglyLinkedList<String> copyList = new SinglyLinkedList<>(list);
 
         printList(copyList);
 
